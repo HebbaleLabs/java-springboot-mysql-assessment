@@ -43,7 +43,7 @@ public class PersonTests {
   }
 
   private void createTestPerson(){
-    String requestJson = "{\"firstName\":\"Classie\",\"lastName\":\"Raub\",\"dateOfBirth\":\"01-05-1985\",\"emailId\":\"classie.raub@mailinator.com\",\"addressess\":[{\"houseNumber\":\"366\",\"street\":\"W.Sussex Street\",\"area\":\"Wappingers Falls\",\"city\":\"New York\",\"pincode\":12590},{\"houseNumber\":\"7\",\"street\":\"West Shub Farm Street\",\"area\":\"Statesville\",\"city\":\"North Carolina\",\"pincode\":28625}],\"phoneNumbers\":[{\"phoneNumber\":\"9945032765\"},{\"phoneNumber\":\"9945132765\"}]}";
+    String requestJson = "{\"firstName\":\"Classie\",\"lastName\":\"Raub\",\"dateOfBirth\":\"01-05-1985\",\"emailId\":\"classie.raub@mailinator.com\",\"addresses\":[{\"houseNumber\":\"366\",\"street\":\"W.Sussex Street\",\"area\":\"Wappingers Falls\",\"city\":\"New York\",\"pincode\":12590},{\"houseNumber\":\"7\",\"street\":\"West Shub Farm Street\",\"area\":\"Statesville\",\"city\":\"North Carolina\",\"pincode\":28625}],\"phoneNumbers\":[{\"phoneNumber\":\"9945032765\"},{\"phoneNumber\":\"9945132765\"}]}";
 
     HttpHeaders headers = new HttpHeaders();
     headers.add("Content-Type","application/json");
@@ -55,7 +55,7 @@ public class PersonTests {
   @Test
   public void test_list_all_persons() throws JSONException {
     ResponseEntity<String> responseEntity = testRestTemplate
-        .getForEntity("/persons/", String.class);
+        .getForEntity("/persons", String.class);
 
     String responseJson = "[]";
     Assert.assertEquals("input:Expected Response ", responseJson, responseEntity.getBody());
@@ -63,7 +63,7 @@ public class PersonTests {
 
   @Test
   public void test_create_person(){
-    String requestJson = "{\"firstName\":\"Cruz\",\"lastName\":\"Christie\",\"dateOfBirth\":\"21-07-1998\",\"emailId\":\"cruz.christie21@mailinator.com\",\"addressess\":[{\"houseNumber\":\"7761\",\"street\":\"Mayflower Lane\",\"area\":\"Altamonte Springs\",\"city\":\"Florida\",\"pincode\":32714},{\"houseNumber\":\"8485\",\"street\":\"Peachtree Street\",\"area\":\"Augusta\",\"city\":\"Georgia\",\"pincode\":30906}],\"phoneNumbers\":[{\"phoneNumber\":\"9047032765\"},{\"phoneNumber\":\"8945132765\"}]}";
+    String requestJson = "{\"firstName\":\"Cruz\",\"lastName\":\"Christie\",\"dateOfBirth\":\"21-07-1998\",\"emailId\":\"cruz.christie21@mailinator.com\",\"addresses\":[{\"houseNumber\":\"7761\",\"street\":\"Mayflower Lane\",\"area\":\"Altamonte Springs\",\"city\":\"Florida\",\"pincode\":32714},{\"houseNumber\":\"8485\",\"street\":\"Peachtree Street\",\"area\":\"Augusta\",\"city\":\"Georgia\",\"pincode\":30906}],\"phoneNumbers\":[{\"phoneNumber\":\"9047032765\"},{\"phoneNumber\":\"8945132765\"}]}";
 
     HttpHeaders headers = new HttpHeaders();
     headers.add("Content-Type","application/json");
@@ -82,7 +82,7 @@ public class PersonTests {
     ResponseEntity<String> getResponseEntity = testRestTemplate
         .getForEntity("/person/{id}", String.class, urlVariables);
 
-    String jsonResponse = "{\"id\":1,\"firstName\":\"Classie\",\"lastName\":\"Raub\",\"dateOfBirth\":\"01-05-1985\",\"emailId\":\"classie.raub@mailinator.com\",\"addressess\":[{\"id\":1,\"houseNumber\":\"366\",\"street\":\"W.Sussex Street\",\"area\":\"Wappingers Falls\",\"city\":\"New York\",\"pincode\":12590},{\"id\":2,\"houseNumber\":\"7\",\"street\":\"West Shub Farm Street\",\"area\":\"Statesville\",\"city\":\"North Carolina\",\"pincode\":28625}],\"phoneNumbers\":[{\"id\":1,\"phoneNumber\":\"9945032765\"},{\"id\":2,\"phoneNumber\":\"9945132765\"}]}";
+    String jsonResponse = "{\"id\":1,\"firstName\":\"Classie\",\"lastName\":\"Raub\",\"dateOfBirth\":\"01-05-1985\",\"emailId\":\"classie.raub@mailinator.com\",\"addresses\":[{\"id\":1,\"houseNumber\":\"366\",\"street\":\"W.Sussex Street\",\"area\":\"Wappingers Falls\",\"city\":\"New York\",\"pincode\":12590},{\"id\":2,\"houseNumber\":\"7\",\"street\":\"West Shub Farm Street\",\"area\":\"Statesville\",\"city\":\"North Carolina\",\"pincode\":28625}],\"phoneNumbers\":[{\"id\":1,\"phoneNumber\":\"9945032765\"},{\"id\":2,\"phoneNumber\":\"9945132765\"}]}";
     Assert.assertEquals("input:Expected http response code ", HttpStatus.OK.value(), getResponseEntity.getStatusCodeValue());
     JSONAssert.assertEquals("input:Expected response ", jsonResponse, getResponseEntity.getBody(), false);
   }
@@ -96,7 +96,7 @@ public class PersonTests {
     ResponseEntity<String> getResponseEntity = testRestTemplate
         .getForEntity("/person/findByPhone/{phoneNumber}", String.class, urlVariables);
 
-    String jsonResponse = "{\"id\":1,\"firstName\":\"Classie\",\"lastName\":\"Raub\",\"dateOfBirth\":\"01-05-1985\",\"emailId\":\"classie.raub@mailinator.com\",\"addressess\":[{\"id\":1,\"houseNumber\":\"366\",\"street\":\"W.Sussex Street\",\"area\":\"Wappingers Falls\",\"city\":\"New York\",\"pincode\":12590},{\"id\":2,\"houseNumber\":\"7\",\"street\":\"West Shub Farm Street\",\"area\":\"Statesville\",\"city\":\"North Carolina\",\"pincode\":28625}],\"phoneNumbers\":[{\"id\":1,\"phoneNumber\":\"9945032765\"},{\"id\":2,\"phoneNumber\":\"9945132765\"}]}";
+    String jsonResponse = "{\"id\":1,\"firstName\":\"Classie\",\"lastName\":\"Raub\",\"dateOfBirth\":\"01-05-1985\",\"emailId\":\"classie.raub@mailinator.com\",\"addresses\":[{\"id\":1,\"houseNumber\":\"366\",\"street\":\"W.Sussex Street\",\"area\":\"Wappingers Falls\",\"city\":\"New York\",\"pincode\":12590},{\"id\":2,\"houseNumber\":\"7\",\"street\":\"West Shub Farm Street\",\"area\":\"Statesville\",\"city\":\"North Carolina\",\"pincode\":28625}],\"phoneNumbers\":[{\"id\":1,\"phoneNumber\":\"9945032765\"},{\"id\":2,\"phoneNumber\":\"9945132765\"}]}";
     Assert.assertEquals("input:Expected http response code ", HttpStatus.OK.value(), getResponseEntity.getStatusCodeValue());
     JSONAssert.assertEquals("input:Expected response ", jsonResponse, getResponseEntity.getBody(), false);
   }
@@ -110,7 +110,7 @@ public class PersonTests {
     ResponseEntity<String> getResponseEntity = testRestTemplate
         .getForEntity("/person/findByEmail/{emailId}", String.class, urlVariables);
 
-    String jsonResponse = "{\"id\":1,\"firstName\":\"Classie\",\"lastName\":\"Raub\",\"dateOfBirth\":\"01-05-1985\",\"emailId\":\"classie.raub@mailinator.com\",\"addressess\":[{\"id\":1,\"houseNumber\":\"366\",\"street\":\"W.Sussex Street\",\"area\":\"Wappingers Falls\",\"city\":\"New York\",\"pincode\":12590},{\"id\":2,\"houseNumber\":\"7\",\"street\":\"West Shub Farm Street\",\"area\":\"Statesville\",\"city\":\"North Carolina\",\"pincode\":28625}],\"phoneNumbers\":[{\"id\":1,\"phoneNumber\":\"9945032765\"},{\"id\":2,\"phoneNumber\":\"9945132765\"}]}";
+    String jsonResponse = "{\"id\":1,\"firstName\":\"Classie\",\"lastName\":\"Raub\",\"dateOfBirth\":\"01-05-1985\",\"emailId\":\"classie.raub@mailinator.com\",\"addresses\":[{\"id\":1,\"houseNumber\":\"366\",\"street\":\"W.Sussex Street\",\"area\":\"Wappingers Falls\",\"city\":\"New York\",\"pincode\":12590},{\"id\":2,\"houseNumber\":\"7\",\"street\":\"West Shub Farm Street\",\"area\":\"Statesville\",\"city\":\"North Carolina\",\"pincode\":28625}],\"phoneNumbers\":[{\"id\":1,\"phoneNumber\":\"9945032765\"},{\"id\":2,\"phoneNumber\":\"9945132765\"}]}";
     Assert.assertEquals("input:Expected http response code ", HttpStatus.OK.value(), getResponseEntity.getStatusCodeValue());
     JSONAssert.assertEquals("input:Expected response ", jsonResponse, getResponseEntity.getBody(), false);
   }
@@ -119,18 +119,18 @@ public class PersonTests {
   public void test_update_person() throws JSONException {
     createTestPerson();
 
-    String requestJson = "{\"id\":1,\"firstName\":\"Classie\",\"lastName\":\"Raub\",\"dateOfBirth\":\"01-05-1985\",\"emailId\":\"classie.raub@mailinator.com\",\"addressess\":[{\"id\":1,\"houseNumber\":\"8312\",\"street\":\"South Surrey Drive\",\"area\":\"Algonquin\",\"city\":\"Ilinois\",\"pincode\":60102},{\"id\":2,\"houseNumber\":\"7\",\"street\":\"West Shub Farm Street\",\"area\":\"Statesville\",\"city\":\"North Carolina\",\"pincode\":28625}],\"phoneNumbers\":[{\"id\":1,\"phoneNumber\":\"9945032765\"},{\"id\":2,\"phoneNumber\":\"9945132765\"}]}";
+    String requestJson = "{\"id\":1,\"firstName\":\"Classie\",\"lastName\":\"Raub\",\"dateOfBirth\":\"01-05-1985\",\"emailId\":\"classie.raub@mailinator.com\",\"addresses\":[{\"id\":1,\"houseNumber\":\"8312\",\"street\":\"South Surrey Drive\",\"area\":\"Algonquin\",\"city\":\"Ilinois\",\"pincode\":60102},{\"id\":2,\"houseNumber\":\"7\",\"street\":\"West Shub Farm Street\",\"area\":\"Statesville\",\"city\":\"North Carolina\",\"pincode\":28625}],\"phoneNumbers\":[{\"id\":1,\"phoneNumber\":\"9945032765\"},{\"id\":2,\"phoneNumber\":\"9945132765\"}]}";
     HttpHeaders headers = new HttpHeaders();
     headers.add("Content-Type","application/json");
     HttpEntity<String> request = new HttpEntity<>(requestJson, headers);
-    testRestTemplate.put("/person/update", request);
+    testRestTemplate.put("/person", request);
 
     Map<String, String> urlVariables = new HashMap<>();
     urlVariables.put("id","1");
     ResponseEntity<String> getResponseEntity = testRestTemplate
         .getForEntity("/person/{id}", String.class, urlVariables);
 
-    String responseJson = "{\"id\":1,\"firstName\":\"Classie\",\"lastName\":\"Raub\",\"dateOfBirth\":\"01-05-1985\",\"emailId\":\"classie.raub@mailinator.com\",\"addressess\":[{\"id\":1,\"houseNumber\":\"8312\",\"street\":\"South Surrey Drive\",\"area\":\"Algonquin\",\"city\":\"Ilinois\",\"pincode\":60102},{\"id\":2,\"houseNumber\":\"7\",\"street\":\"West Shub Farm Street\",\"area\":\"Statesville\",\"city\":\"North Carolina\",\"pincode\":28625}],\"phoneNumbers\":[{\"id\":1,\"phoneNumber\":\"9945032765\"},{\"id\":2,\"phoneNumber\":\"9945132765\"}]}";
+    String responseJson = "{\"id\":1,\"firstName\":\"Classie\",\"lastName\":\"Raub\",\"dateOfBirth\":\"01-05-1985\",\"emailId\":\"classie.raub@mailinator.com\",\"addresses\":[{\"id\":1,\"houseNumber\":\"8312\",\"street\":\"South Surrey Drive\",\"area\":\"Algonquin\",\"city\":\"Ilinois\",\"pincode\":60102},{\"id\":2,\"houseNumber\":\"7\",\"street\":\"West Shub Farm Street\",\"area\":\"Statesville\",\"city\":\"North Carolina\",\"pincode\":28625}],\"phoneNumbers\":[{\"id\":1,\"phoneNumber\":\"9945032765\"},{\"id\":2,\"phoneNumber\":\"9945132765\"}]}";
     Assert.assertEquals("input:Expected http response code ", HttpStatus.OK.value(), getResponseEntity.getStatusCodeValue());
     JSONAssert.assertEquals("input:Expected response ", responseJson, getResponseEntity.getBody(), false);
 
@@ -138,7 +138,7 @@ public class PersonTests {
 
   @Test
   public void test_create_person_existing_email() throws JSONException {
-    String personOneRequestJson = "{\"firstName\":\"Cruz\",\"lastName\":\"Christie\",\"dateOfBirth\":\"21-07-1998\",\"emailId\":\"cruz.christie21@mailinator.com\",\"addressess\":[{\"houseNumber\":\"7761\",\"street\":\"Mayflower Lane\",\"area\":\"Altamonte Springs\",\"city\":\"Florida\",\"pincode\":32714},{\"houseNumber\":\"8485\",\"street\":\"Peachtree Street\",\"area\":\"Augusta\",\"city\":\"Georgia\",\"pincode\":30906}],\"phoneNumbers\":[{\"phoneNumber\":\"9047032765\"},{\"phoneNumber\":\"8945132765\"}]}";
+    String personOneRequestJson = "{\"firstName\":\"Cruz\",\"lastName\":\"Christie\",\"dateOfBirth\":\"21-07-1998\",\"emailId\":\"cruz.christie21@mailinator.com\",\"addresses\":[{\"houseNumber\":\"7761\",\"street\":\"Mayflower Lane\",\"area\":\"Altamonte Springs\",\"city\":\"Florida\",\"pincode\":32714},{\"houseNumber\":\"8485\",\"street\":\"Peachtree Street\",\"area\":\"Augusta\",\"city\":\"Georgia\",\"pincode\":30906}],\"phoneNumbers\":[{\"phoneNumber\":\"9047032765\"},{\"phoneNumber\":\"8945132765\"}]}";
 
     HttpHeaders headers = new HttpHeaders();
     headers.add("Content-Type","application/json");
@@ -146,7 +146,7 @@ public class PersonTests {
     ResponseEntity<String> responseEntity =
         testRestTemplate.postForEntity("/person", personOneRequest, String.class);
 
-    String personTwoRequestJson = "{\"firstName\":\"Oscar\",\"lastName\":\"Barrett\",\"dateOfBirth\":\"31-05-2001\",\"emailId\":\"cruz.christie21@mailinator.com\",\"addressess\":[{\"houseNumber\":\"3061\",\"street\":\"South Surrey Drive\",\"area\":\"Algonquin\",\"city\":\"Ilinois\",\"pincode\":60102}],\"phoneNumbers\":[{\"phoneNumber\":\"9047032765\"}]}";
+    String personTwoRequestJson = "{\"firstName\":\"Oscar\",\"lastName\":\"Barrett\",\"dateOfBirth\":\"31-05-2001\",\"emailId\":\"cruz.christie21@mailinator.com\",\"addresses\":[{\"houseNumber\":\"3061\",\"street\":\"South Surrey Drive\",\"area\":\"Algonquin\",\"city\":\"Ilinois\",\"pincode\":60102}],\"phoneNumbers\":[{\"phoneNumber\":\"9047032765\"}]}";
     HttpEntity<String> personTwoRequest = new HttpEntity<>(personTwoRequestJson, headers);
     ResponseEntity<String> personTwoResponseEntity =
         testRestTemplate.postForEntity("/person", personTwoRequest, String.class);
